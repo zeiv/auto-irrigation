@@ -1,0 +1,6 @@
+*.ccxml
+lnk_*
+Release/*
+!Release/auto-irrigation.txt
+Debug/*
+!Debug/auto-irrigation.txt
