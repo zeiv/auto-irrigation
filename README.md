@@ -22,8 +22,8 @@ There are several variables at the beginning of main.c which can be adjusted to 
  * *WATER* - Output pin to control water flow.  Default is P1.6: `BIT6`
  * *PROBE* - Analog input for monitoring soil moisture.  Defult is P1.5/A5: `BIT5`
  * *MIN_DRY* - Minimum ADC reading at which point water flow is triggered.  A value of 0 represents a perfect connection between the probe and ground, so higher values mean dryer soil.  Default is `0x0220`
- * *HYDR* - The difference in ADC levels between MIN_DRY and when water flow is stopped.  I higher number means that water will flow for a longer time.  Note that this value cannot exceed MIN_DRY.  Default is `0x150`
- * *BTN* - Input pin which is connected to a button. Default is P1.3: `BIT3`
+ * *W_TIME* - How long to water the plant in seconds.  Default is 30 seconds.
+ * *DELAY* - Minimum amount of time to wait before next watering in minutes.  Default is 120 minutes.
 
 To build this project for a device other than the MSP430G2553, create a new project in Code Composer Studio and set up the environment for your device in the new project wizard.  Then, import the source code and change line 13 of main.c to reflect your device.
 
