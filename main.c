@@ -52,9 +52,9 @@
 // Pin Configuration (Defaults in parentheses):
 #define WATER BIT6								// Output for water flow control (P1.6)
 #define PROBE BIT5								// Input for dryness detection probe (P1.1 = A1)
-#define MIN_DRY 0x0100							// ADC Input level at which to turn on water flow (0x220)
-#define W_TIME 30								// How long to water the plany in seconds
-#define DELAY 0.5								// Minimum time to wait between waterings in minutes
+#define MIN_DRY 0x0060							// ADC Input level at which to turn on water flow (0x220)
+#define W_TIME 5								// How long to water the plany in seconds
+#define DELAY 350								// Minimum time to wait between waterings in minutes
 #define BTN BIT3								// Button for bypassing automatic watering
 
 int flow = 0;
@@ -146,7 +146,7 @@ void main(void)
 		if (ADC10MEM > MIN_DRY && delay >= (DELAY*60)) {				// When the dryness rises above MIN_DRY and Bypass is disabled,
 			P1OUT |= WATER;						// Turns on water flow
 			flow = 1;
-			delay = 0;
+			delay = 0;3
 			_BIS_SR(LPM3_bits + GIE); // Enter LPM3 w/interrupt
 
 		}
@@ -173,7 +173,9 @@ __interrupt void watchdog_timer (void)
 		}
 	}
 	else if (flow == 0) {
-		delay++;
+		if (delay < 40000) {
+			delay++;
+		}
 	}
 }
 #pragma vector=NMI_VECTOR
